@@ -1,0 +1,11 @@
+openapi: "3.0.0"
+info:
+  description: "API des Ladesäulenregisters der Bundesnetzagentur"
+  version: "1.0.0"
+  title: "Bundesnetzagentur: Ladesäulenregisters"
+
+
+
+externalDocs:
+  description: "Ausführlichere Dokumentation"
+  url: "https://services6.arcgis.com/6jU7RmJig2Wwo1b0/arcgis/rest/services/Ladesaeulenregister/FeatureServer/7/query"
