@@ -1,0 +1,1 @@
+# Ladesäulenregister (Bundesnetzagentur)
