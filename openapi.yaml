@@ -2,10 +2,459 @@ openapi: "3.0.0"
 info:
   description: "API des Ladesäulenregisters der Bundesnetzagentur"
   version: "1.0.0"
-  title: "Bundesnetzagentur: Ladesäulenregisters"
+  title: "Bundesnetzagentur: Ladesäulenregister"
 
+paths:
+  /query:
+    get:
+      summary: Query für alle Ladesäulen
+      parameters:
+        - name: geometry
+          in: query
+          description: Geometry filter. URL-enkodiertes JSON Objekt vom Typ `Geometry`
+          required: true
+          schema:
+            type: string
+        - name: geometryType
+          in: query
+          description: Art der Geometry
+          required: false
+          schema:
+            type: string
+            default: ''
+            enum: [esriGeometryEnvelope, esriGeometryPoint, esriGeometryPolyline, esriGeometryPolygon, esriGeometryMultipoint]
+        - name: f
+          in: query
+          style: form
+          description: Ausgabeformat der Daten. Default ist 'html'.
+          required: false
+          schema:
+            type: string
+            enum: [json, geojson, pbf, html]
+        - name: outFields
+          in: query
+          description: "Auswahl der Felder, die ausgegeben werden sollen, durch Komma getrennt"
+          required: true
+          schema:
+            type: string
+            default: '*'
+        - name: objectIds
+          in: query
+          description: Komma-separierte Liste von IDs (integer), filtert nach den einzelnen Objekten
+          required: false
+          schema:
+            type: string
+            example: '42,123,666'
+        - name: orderByFields
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: returnGeometry
+          in: query
+          style: form
+          description: ""
+          required: false
+          allowEmptyValue: true
+          schema:
+            type: boolean
+        - name: spatialRel
+          in: query
+          style: form
+          description: Spatial Relationships
+          required: false
+          schema:
+            type: string
+            enum: [esriSpatialRelIntersects, esriSpatialRelContains, esriSpatialRelCrosses, esriSpatialRelEnvelopeIntersects, esriSpatialRelIndexIntersects, esriSpatialRelOverlaps, esriSpatialRelTouches, esriSpatialRelWithin, esriSpatialRelDisjoint]
+        - name: inSR
+          in: query
+          description: Input Spatial Reference
+          required: false
+          schema:
+            type: integer
+        - name: outSR
+          in: query
+          description: Output Spatial Reference
+          required: false
+          schema:
+            type: integer
+        - name: maxRecordCountFactor
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: integer
+        - name: resultType
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: string
+            enum: [none, standard, tile]
+        - name: quantizationParameters
+          in: query
+          description: URL-enkodiertes JSON Objekt vom Typ `QuantizationParameter`
+          required: false
+          schema:
+            type: string
+        - name: where
+          in: query
+          description: SQL "where" Filter
+          required: false
+          schema:
+            type: string
+        - name: having
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: time
+          in: query
+          required: false
+          schema:
+            type: integer
+        - name: distance
+          in: query
+          required: false
+          schema:
+            type: string
+          example: '0.0'
+        - name: units
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [esriSRUnit_Meter, esriSRUnit_StatuteMile, esriSRUnit_Foot, esriSRUnit_Kilometer, esriSRUnit_NauticalMile, esriSRUnit_USNauticalMile]
+        - name: geometryPrecision
+          in: query
+          required: false
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: featureEncoding
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [esriDefault, esriCompressedShapeBuffer]
+        - name: groupByFieldsForStatistics
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: cacheHint
+          in: query
+          schema:
+            type: boolean
+        - name: returnExtentOnly
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: returnZ
+          in: query
+          schema:
+            type: boolean
+        - name: returnIdsOnly
+          in: query
+          schema:
+            type: boolean
+        - name: returnCentroid
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: boolean
+        - name: returnExceededLimitFeatures
+          in: query
+          description: ''
+          required: false
+          schema:
+            type: boolean
+        - name: datumTransformation
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: resultOffset
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: applyVCSProjection
+          in: query
+          schema:
+            type: boolean
+        - name: outStatistics
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: returnDistinctValues
+          in: query
+          schema:
+            type: boolean
+        - name: multipatchOption
+          in: query
+          schema:
+            type: string
+            enum: [none, xyFootprint, stripMaterials, embedMaterials, externalizeTextures, extent]
+        - name: returnM
+          in: query
+          schema:
+            type: boolean
+        - name: maxAllowableOffset
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: integer
+        - name: returnCountOnly
+          in: query
+          schema:
+            type: boolean
+        - name: returnUniqueIdsOnly
+          in: query
+          schema:
+            type: boolean
+        - name: returnQueryGeometry
+          in: query
+          schema:
+            type: boolean
+        - name: resultRecordCount
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: integer
+        - name: sqlFormat
+          in: query
+          schema:
+            type: string
+            enum: [none, standard, native]
+        - name: token
+          in: query
+          allowEmptyValue: true
+          schema:
+            type: string
+        - name: returnGeodetic
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StationOverview'
+      servers:
+        - url: https://services6.arcgis.com/6jU7RmJig2Wwo1b0/ArcGIS/rest/services/Ladesaeulenregister/FeatureServer/7
 
+components:
+  schemas:
+    StationOverview:
+      type: object
+      properties:
+        objectIdFieldName: 
+          type: string
+        uniqueIdField: 
+          type: object
+          properties: 
+            name: 
+              type: string
+            isSystemMaintained: 
+              type: boolean
+        globalIdFieldName: 
+          type: string
+        geometryType: 
+          type: string
+        spatialReference: 
+          type: object
+          properties: 
+            wkid: 
+              type: integer
+              format: int32
+            latestWkid: 
+              type: integer
+              format: int32
+        transform: 
+          type: object
+          properties: 
+            originPosition: 
+              type: string
+            scale: 
+              type: array
+              items: 
+                type: number
+            translate: 
+              type: array
+              items: 
+                type: number
+        fields: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              name: 
+                type: string
+              type: 
+                type: string
+              alias: 
+                type: string
+              sqlType: 
+                type: string
+              domain: 
+                type: string
+                format: nullable
+              defaultValue: 
+                type: string
+                format: nullable
+        features: 
+          type: array
+          items: 
+            type: object
+            properties: 
+              attributes: 
+                type: object
+                properties: 
+                  ID: 
+                    type: integer
+                    format: int32
+                  Betreiber_: 
+                    type: string
+                  Standort_: 
+                    type: string
+                  Längengrad_: 
+                    type: number
+                  Breitengrad_: 
+                    type: number
+                  für_die_Überschrift_: 
+                    type: string
+                  Anzahl_Ladepunkte_: 
+                    type: string
+                  Art_des_Ladepunktes_: 
+                    type: string
+                  AC_Steckdose_Typ_2__1_: 
+                    type: string
+                  AC_Kupplung_Typ_2__1_: 
+                    type: string
+                  DC_Kupplung_Combo__1_: 
+                    type: string
+                  AC_Schuko__1_: 
+                    type: string
+                  AC_CEE_5_polig__1_: 
+                    type: string
+                  AC_CEE_3_polig__1_: 
+                    type: string
+                  DC_CHAdeMO__1_: 
+                    type: string
+                  Sonstige_Stecker__1_: 
+                    type: string
+                  Nennleistung_Ladepunkt_1_: 
+                    type: string
+                  Public_Key__1_: 
+                    type: string
+                  Art_des_Ladepunktes_2_: 
+                    type: string
+                  AC_Steckdose_Typ_2__2_: 
+                    type: string
+                  AC_Kupplung_Typ_2__2_: 
+                    type: string
+                  DC_Kupplung_Combo__2_: 
+                    type: string
+                  AC_Schuko__2_: 
+                    type: string
+                  AC_CEE_5_polig__2_: 
+                    type: string
+                  AC_CEE_3_polig__2_: 
+                    type: string
+                  DC_CHAdeMO__2_: 
+                    type: string
+                  Sonstige_Stecker__2_: 
+                    type: string
+                  Nennleistung_Ladepunkt_2_: 
+                    type: string
+                  Public_Key__2_: 
+                    type: string
+                  Art_des_Ladepunktes_3_: 
+                    type: string
+                  AC_Steckdose_Typ_2__3_: 
+                    type: string
+                  AC_Kupplung_Typ_2__3_: 
+                    type: string
+                  DC_Kupplung_Combo__3_: 
+                    type: string
+                  AC_Schuko__3_: 
+                    type: string
+                  AC_CEE_5_polig__3_: 
+                    type: string
+                  AC_CEE_3_polig__3_: 
+                    type: string
+                  DC_CHAdeMO__3_: 
+                    type: string
+                  Sonstige_Stecker__3_: 
+                    type: string
+                  Nennleistung_Ladepunkt_3_: 
+                    type: string
+                  Public_Key__3_: 
+                    type: string
+                  Art_des_Ladepunktes_4_: 
+                    type: string
+                  AC_Steckdose_Typ_2__4_: 
+                    type: string
+                  AC_Kupplung_Typ_2__4_: 
+                    type: string
+                  DC_Kupplung_Combo__4_: 
+                    type: string
+                  AC_Schuko__4_: 
+                    type: string
+                  AC_CEE_5_polig__4_: 
+                    type: string
+                  AC_CEE_3_polig__4_: 
+                    type: string
+                  DC_CHAdeMO__4_: 
+                    type: string
+                  Sonstige_Stecker__4_: 
+                    type: string
+                  Nennleistung_Ladepunkt_4_: 
+                    type: string
+                  Public_Key__4_: 
+                    type: string
+                  OBJECTID: 
+                    type: integer
+                    format: int32
+    Geometry:
+      type: object
+      properties:
+        xmin: 
+          type: number
+        ymin: 
+          type: number
+        xmax: 
+          type: number
+        ymax: 
+          type: number
+        spatialReference: 
+          type: object
+          properties: 
+            wkid: 
+              type: integer
+              format: int32
+            latestWkid: 
+              type: integer
+              format: int32
+    QuantizationParameter:
+      type: object
+      properties:
+        mode: 
+          type: string
+        originPosition: 
+          type: string
+        tolerance: 
+          type: number
+        extent: 
+          type: object
+          $ref: '#/components/schemas/Geometry'
 
 externalDocs:
   description: "Ausführlichere Dokumentation"
-  url: "https://services6.arcgis.com/6jU7RmJig2Wwo1b0/arcgis/rest/services/Ladesaeulenregister/FeatureServer/7/query"
+  url: "https://services6.arcgis.com/6jU7RmJig2Wwo1b0/ArcGIS/rest/services/Ladesaeulenregister/FeatureServer/7"
