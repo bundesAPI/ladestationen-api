@@ -326,7 +326,7 @@ class DefaultApi(object):
             out_fields (str): Auswahl der Felder, die ausgegeben werden sollen, durch Komma getrennt. defaults to "*", must be one of ["*"]
 
         Keyword Args:
-            geometry_type (str): Art der Geometry. [optional] if omitted the server will use the default value of ""
+            geometry_type (str): Art der Geometry. [optional] if omitted the server will use the default value of "esriGeometryEnvelope"
             f (str): Ausgabeformat der Daten. Default ist 'html'.. [optional]
             object_ids (str): Komma-separierte Liste von IDs (integer), filtert nach den einzelnen Objekten. [optional]
             order_by_fields (str): [optional]

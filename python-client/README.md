@@ -65,7 +65,7 @@ with ladestationen.ApiClient(configuration) as api_client:
     api_instance = default_api.DefaultApi(api_client)
     geometry = "geometry_example" # str | Geometry filter. URL-enkodiertes JSON Objekt vom Typ `Geometry`
 out_fields = "*" # str | Auswahl der Felder, die ausgegeben werden sollen, durch Komma getrennt (default to "*")
-geometry_type = "" # str | Art der Geometry (optional) (default to "")
+geometry_type = "esriGeometryEnvelope" # str | Art der Geometry (optional) (default to "esriGeometryEnvelope")
 f = "json" # str | Ausgabeformat der Daten. Default ist 'html'. (optional)
 object_ids = "42,123,666" # str | Komma-separierte Liste von IDs (integer), filtert nach den einzelnen Objekten (optional)
 order_by_fields = "orderByFields_example" # str |  (optional)
