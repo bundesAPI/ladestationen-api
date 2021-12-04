@@ -21,7 +21,7 @@ paths:
           required: false
           schema:
             type: string
-            default: ''
+            default: esriGeometryEnvelope
             enum: [esriGeometryEnvelope, esriGeometryPoint, esriGeometryPolyline, esriGeometryPolygon, esriGeometryMultipoint]
         - name: f
           in: query
@@ -452,7 +452,6 @@ components:
         tolerance: 
           type: number
         extent: 
-          type: object
           $ref: '#/components/schemas/Geometry'
 
 externalDocs:
