@@ -3,7 +3,7 @@ additionalProperties:
   packageName: "ladestationen"
   infoName: "BundesAPI"
   infoEmail: "kontakt@bund.dev"
-  packageVersion: 1.0.4
+  packageVersion: 1.0.5
   packageUrl: "https://github.com/bundesAPI/ladestationen-api"
   namespace: "deutschland"
   docLanguage: "de"
