@@ -1,7 +1,7 @@
 [tool]
 [tool.poetry]
 name = "de-ladestationen"
-version = "1.0.4"
+version = "1.0.5"
 description = "Bundesnetzagentur: Ladesäulenregister"
 keywords = ["OpenAPI", "OpenAPI-Generator", "ladestationen", "App", "API"]
 homepage = "https://github.com/bundesAPI/ladestationen-api"
